@@ -64,6 +64,6 @@ Built-in quicksort took: 0.147030 sec.
 
     After this initial observation, we conduct a structured experiment: for each array size, we run the quicksort implementations 30 times and calculate the average time. The resulting performance plot will be used to conclude that after a certain input size, the **parallel implementation definitely becomes the fastest**, whereas the sequential time is confirmed as the slowest due to the overhead of thread management in the parallel version being overcome by the increased work.  (check the plot, ?????)
 
-    [[./data/mcucii/quicksort_results.png]]
+    [[./data/mcucii_2025_15_10/quicksort_results.png]]
 
 
