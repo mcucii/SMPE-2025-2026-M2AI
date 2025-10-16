@@ -17,20 +17,21 @@ def plot_results(filename):
 
         plt.figure(figsize=(10, 6))
 
-        plt.plot(avg_times.index, avg_times['sequential_time'], marker='o', label='Sequential Quicksort')
-        plt.plot(avg_times.index, avg_times['parallel_time'], marker='s', label='Parallel Quicksort')
-        plt.plot(avg_times.index, avg_times['builtin_time'], marker='^', label='Built-in (Reference) Sort')
+
+        array_sizes = [int(x) for x in avg_times.index]  # konverzija u int
+
+        plt.plot(array_sizes, avg_times['sequential_time'], 'o-', label='Sequential Quicksort')
+        plt.plot(array_sizes, avg_times['parallel_time'], 's-', label='Parallel Quicksort')
+        plt.plot(array_sizes, avg_times['builtin_time'], '^-', label='Built-in (Reference) Sort')
+
+        # plt.plot(avg_times.index, avg_times['sequential_time'], marker='o', label='Sequential Quicksort')
+        # plt.plot(avg_times.index, avg_times['parallel_time'], marker='s', label='Parallel Quicksort')
+        # plt.plot(avg_times.index, avg_times['builtin_time'], marker='^', label='Built-in (Reference) Sort')
 
         # Formatting
         plt.title('Quicksort Performance: Time vs. Array Size (Avg. of 30 Runs)')
         plt.xlabel('Array Size')
         plt.ylabel('Average Execution Time (s)')
-
-        ax = plt.gca()
-        ax.xaxis.set_major_formatter(ScalarFormatter())
-        ax.ticklabel_format(style='plain', axis='x')
-        ticks = [300000, 500000, 1000000, 2000000, 3000000]
-        plt.xticks(ticks, rotation=45)
 
         plt.grid(True, which="both", ls="--", alpha=0.6)
         plt.legend()

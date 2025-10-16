@@ -10,7 +10,8 @@ from plot import plot_results
 
 NUM_REPETITIONS = 30
 
-ARRAY_SIZES = [str(i) for i in range(300000, 3000001, 100000)]
+#ARRAY_SIZES = [str(i) for i in range(100000, 100000001, 10000000)]
+ARRAY_SIZES = [str(i) for i in range(100000, 25000001, 2500000)]
 
 
 def save_results_to_csv(results_data, filename):
@@ -73,5 +74,6 @@ def conduct_experiments(array_sizes, repetitions):
 final_csv_file = conduct_experiments(ARRAY_SIZES, NUM_REPETITIONS)
 
 if final_csv_file:
+    print(ARRAY_SIZES)
     print("Plotting...")
     plot_results(final_csv_file)
