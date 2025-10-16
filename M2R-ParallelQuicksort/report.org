@@ -41,7 +41,7 @@ The performance evaluation follows a systematic approach:
 2.  Phased Performance Analysis:
 The analysis was conducted in three distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
 
-Phase 4.1: Initial Analysis
+** Phase 4.1: Initial Analysis
 Initial ad-hoc executions revealed that the Parallel Quicksort was consistently the slowest. The overhead introduced by thread management for these smaller array sizes exceeded any potential speedup. The built-in system sort served as the fastest reference baseline.
 
 Ad-Hoc Run Examples:
@@ -58,14 +58,14 @@ Built-in quicksort took: 0.143148 sec.
 #+END_SRC
 
 
-Phase 4.2: Low-Range Analysis ($300,000$ to $3,000,000$)
+** Phase 4.2: Low-Range Analysis ($300,000$ to $3,000,000$)
 
 Now, I tested for ARRAY_SIZES ranging from $300000$ to $3000000$ with a step of $300000$, and I still get that parallel approach is very slow:
 
 Result Visualization for Phase 4.2:
 [[./data/mcucii_2025_15_10/quicksort_results1.png]]
 
-Phase 4.3: Crossover Point Identification (Extended Range $\le 100,000,001$)
+** Phase 4.3: Crossover Point Identification (Extended Range $\le 100,000,001$)
 
 To find the array size necessary to observe a speedup, the input range was dramatically increased (from $100,000$ to $100,000,001$ with $10,000,000$ steps). This test was executed only once due to the significantly longer execution times. This preliminary test successfully identified the crossover point:
 
@@ -77,7 +77,7 @@ Result Visualization for Phase 4.3
 [[./data/mcucii_2025_15_10/quicksort_results2.png]]
 
 
-Phase 4.4: High-Range Statistical Verification (Refined Range $\le 25,000,001$)
+** Phase 4.4: High-Range Statistical Verification (Refined Range $\le 25,000,001$)
 
 Based on the finding in Phase 4.3, the array size range was refined to focus on the identified crossover zone ($100,000$ to $25,000,001$ with $2,500,000$ steps). An initial single run was performed to confirm the refined range:
 
