@@ -14,6 +14,7 @@ def plot_results(filename):
         df['size'] = pd.to_numeric(df['size'])
 
         avg_times = df.groupby('size')[['sequential_time', 'parallel_time', 'builtin_time']].mean()
+        NUM_REPETITIONS = df.groupby('size').size().iloc[0]
 
         plt.figure(figsize=(10, 6))
 
@@ -24,12 +25,9 @@ def plot_results(filename):
         plt.plot(array_sizes, avg_times['parallel_time'], 's-', label='Parallel Quicksort')
         plt.plot(array_sizes, avg_times['builtin_time'], '^-', label='Built-in (Reference) Sort')
 
-        # plt.plot(avg_times.index, avg_times['sequential_time'], marker='o', label='Sequential Quicksort')
-        # plt.plot(avg_times.index, avg_times['parallel_time'], marker='s', label='Parallel Quicksort')
-        # plt.plot(avg_times.index, avg_times['builtin_time'], marker='^', label='Built-in (Reference) Sort')
-
         # Formatting
-        plt.title('Quicksort Performance: Time vs. Array Size (Avg. of 30 Runs)')
+        title_string = f'Quicksort Performance: Time vs. Array Size (Avg. of {NUM_REPETITIONS} Runs)'
+        plt.title(title_string)
         plt.xlabel('Array Size')
         plt.ylabel('Average Execution Time (s)')
 

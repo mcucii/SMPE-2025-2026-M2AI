@@ -8,10 +8,10 @@ from run_quicksort import execute_quicksort, get_times
 from plot import plot_results
 
 
-NUM_REPETITIONS = 30
+NUM_REPETITIONS = 1
 
-#ARRAY_SIZES = [str(i) for i in range(100000, 100000001, 10000000)]
-ARRAY_SIZES = [str(i) for i in range(100000, 25000001, 2500000)]
+ARRAY_SIZES = [str(i) for i in range(100000, 100000001, 10000000)]
+#ARRAY_SIZES = [str(i) for i in range(100000, 25000001, 2500000)]
 
 
 def save_results_to_csv(results_data, filename):
