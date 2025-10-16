@@ -33,14 +33,12 @@ This directory serves as the output location for all generated results.
 ** Experiment Methodology
 The performance evaluation follows a systematic approach:
 
-1.  Input Range: Array sizes range from 300,000 to 3,000,000 elements, stepping every 100,000.
-2.  Repetitions: Each array size is tested 30 times (=NUM_REPETITIONS=) to ensure reliable, statistically stable results.
-3.  Metrics: Three execution times are captured for each run:
+1.  Metrics: Three execution times are captured for each run:
     - Sequential Quicksort Time
     - Parallel Quicksort Time
     - Built-in System Sort Time (for baseline comparison)
 
-4.  Phased Performance Analysis:
+2.  Phased Performance Analysis:
 The analysis was conducted in three distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
 
 Phase 4.1: Initial Low-Range Analysis ($300,000$ to $3,000,000$)
