@@ -1,0 +1,10 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+M2R-ParallelQuicksort/test/venv/
+
+# Other files or directories you might want to ignore
+*.log
+*.env
