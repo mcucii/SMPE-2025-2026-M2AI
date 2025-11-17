@@ -1,4 +1,4 @@
-## Quiz 6
+## Quiz 7
 ### Recent examples of studies that have been the subject of much debate
 
 1. In the studies we have presented to you, what prevents, sometimes for several years, the debate on the relevance of a study?
