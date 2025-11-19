@@ -8,3 +8,18 @@ M2R-ParallelQuicksort/test/venv/
 # Other files or directories you might want to ignore
 *.log
 *.env
+
+# IDE
+.vscode/
+.idea/
+
+# Virtual environments
+myenv/
+env/
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+__pycache__/
+*.pyc

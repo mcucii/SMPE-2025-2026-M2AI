@@ -19,11 +19,8 @@ Running the code:
 ./src/parallelQuicksort [ARRAY_SIZE]
 #+END_SRC
 
-*** /test
-This directory contains the Python scripts that enable experimentation under various conditions. Its contents include:
-    - =run_quicksort.py=: Provides the core function to execute the C program once and parse the output times.
-    - =run_experiments.py=: The main orchestration script that controls the test cycle (sizes from 300,000 to 3,000,000 with a 100,000 step), saves the data, and generates the plots.
-    - =plot.py=: Contains the dedicated plotting functions that read the generated CSV and produce the performance graph.
+*** /scripts
+This directory contains the Jupyter notebook "quicksort_benchmarking.ipynb" which includes all experimental code, execution results, and visualizations.
 
 *** /data
 This directory serves as the output location for all generated results.
@@ -39,54 +36,41 @@ The performance evaluation follows a systematic approach:
     - Built-in System Sort Time (for baseline comparison)
 
 2.  Phased Performance Analysis:
-The analysis was conducted in four distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
+The analysis was conducted in fthree distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
 
-** Phase 4.1: Initial Analysis
+** Phase 2.1: Initial Analysis
 Initial ad-hoc executions revealed that the Parallel Quicksort was consistently the slowest. The overhead introduced by thread management for these smaller array sizes exceeded any potential speedup. The built-in system sort served as the fastest reference baseline.
 
 Ad-Hoc Run Examples:
 #+BEGIN_SRC bash
 ./src/parallelQuicksort
-Sequential quicksort took: 0.159276 sec.
-Parallel quicksort took: 0.206333 sec.
-Built-in quicksort took: 0.142748 sec.
+Sequential quicksort took: 0.199948 sec.
+Parallel quicksort took: 0.572463 sec.
+Built-in quicksort took: 0.214211 sec.
 
 ./src/parallelQuicksort
-Sequential quicksort took: 0.167634 sec.
-Parallel quicksort took: 0.191118 sec.
-Built-in quicksort took: 0.143148 sec.
+Sequential quicksort took: 0.153966 sec.
+Parallel quicksort took: 0.438146 sec.
+Built-in quicksort took: 0.163230 sec.
 #+END_SRC
 
 
-** Phase 4.2: Low-Range Analysis ($300,000$ to $3,000,000$)
+** Phase 2.2: Low-Range Analysis ($100,000$ to $1,000,000$)
 
-Now, I tested for ARRAY_SIZES ranging from $300000$ to $3000000$ with a step of $300000$, and I still get that parallel approach is very slow:
+Now, I tested for ARRAY_SIZES ranging from $100000$ to $1000000$ with a step of $100000$, for $20$ repetitions, and the situation was following:
 
-Result Visualization for Phase 4.2:
+Result Visualization for Phase 2.2:
 [[./data/mcucii_2025_15_10/quicksort_results1.png]]
 
-** Phase 4.3: Crossover Point Identification (Extended Range $\le 100,000,001$)
-
-To find the array size necessary to observe a speedup, the input range was dramatically increased (from $100,000$ to $100,000,001$ with $10,000,000$ steps). This test was executed only once due to the significantly longer execution times. This preliminary test successfully identified the crossover point:
-
-The Parallel Quicksort demonstrated superior performance, becoming the fastest method when the array size exceeded approximately $20,000,000$ elements.
-
-For array sizes above this threshold, the parallel approach was nearly $5$ seconds faster than the other two methods, which performed similarly.
-
-Result Visualization for Phase 4.3
-[[./data/mcucii_2025_15_10/quicksort_results2.png]]
+We san see unexpected performance where the parallel implementation is consistently slower than both sequential and built-in sorting. The parallel version runs slower because managing and coordinating threads requires more time than what we save by dividing the work. Next, I will test with larger array sizes to see if the parallel approach becomes more effective.
 
 
-** Phase 4.4: High-Range Statistical Verification (Refined Range $\le 25,000,001$)
+** Phase 2.3: Crossover Point Identification (Extended Range: $1000,000$ to $10,000,000$)
 
-Based on the finding in Phase 4.3, the array size range was refined to focus on the identified crossover zone ($100,000$ to $25,000,001$ with $2,500,000$ steps). An initial single run was performed to confirm the refined range:
+To find the array size necessary to observe a speedup, the input range was dramatically increased (from $1,000,000$ to $10,000,000$ with $1,000,000$ step size). This test was executed also $20$ times. This preliminary test successfully identified the crossover point:
+The Parallel Quicksort demonstrated superior performance, becoming the fastest method when the array size exceeded approximately $6,000,000$ elements.
 
-Result Visualization for Refined Single Run:
-[[./data/mcucii_2025_15_10/quicksort_results3.png]]
+Result Visualization for Phase 2.3
+[[./data/mcucii_2025_15_10/quicksort_resultsFINAL.png]]
 
-The results confirm that the parallel implementation begins to yield significant speedup just under $25,000,000$ elements on my testing platform.
-
-To ensure statistical reliability, this final, crucial range was executed with the standard 30 repetitions, yielding the following final result:
-
-Result Visualization for Final 30-Repetition Run (Phase 4.4):
-[[./data/mcucii_2025_15_10/quicksort_results4.png]]
+The parallel implementation successfully outperforms both sequential and built-in sorting methods, demonstrating effective parallelization. The consistent performance advantage across all tested array sizes, with clear separation in confidence intervals, confirms the practical benefits of our parallel approach.
