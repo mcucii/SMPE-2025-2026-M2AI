@@ -36,10 +36,10 @@ The performance evaluation follows a systematic approach:
     - Built-in System Sort Time (for baseline comparison)
 
 2.  Phased Performance Analysis:
-The analysis was conducted in fthree distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
+The analysis was conducted in three distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
 
 ** Phase 2.1: Initial Analysis
-Initial ad-hoc executions revealed that the Parallel Quicksort was consistently the slowest. The overhead introduced by thread management for these smaller array sizes exceeded any potential speedup. The built-in system sort served as the fastest reference baseline.
+Initial ad-hoc executions for small input size (default: 100,000), revealed that the Parallel Quicksort was consistently the slowest. The sequential implementation demonstrated the fastest performance. The parallel version was slower due to thread management overhead, which exceeded any potential benefits of parallel execution for these array sizes.
 
 Ad-Hoc Run Examples:
 #+BEGIN_SRC bash
