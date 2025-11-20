@@ -38,7 +38,7 @@ The performance evaluation follows a systematic approach:
 2.  Phased Performance Analysis:
 The analysis was conducted in three distinct phases, progressively increasing the input size to accurately measure the crossover point where the parallel approach overcomes its threading overhead.
 
-** Phase 2.1: Initial Analysis
+** Phase 1: Initial Analysis
 Initial ad-hoc executions for small input size (default: 100,000), revealed that the Parallel Quicksort was consistently the slowest. The sequential implementation demonstrated the fastest performance. The parallel version was slower due to thread management overhead, which exceeded any potential benefits of parallel execution for these array sizes.
 
 Ad-Hoc Run Examples:
@@ -55,7 +55,7 @@ Built-in quicksort took: 0.163230 sec.
 #+END_SRC
 
 
-** Phase 2.2: Low-Range Analysis ($100,000$ to $1,000,000$)
+** Phase 2: Low-Range Analysis ($100,000$ to $1,000,000$)
 
 Now, I tested for ARRAY_SIZES ranging from $100000$ to $1000000$ with a step of $100000$, for $20$ repetitions, and the situation was following:
 
@@ -65,7 +65,7 @@ Result Visualization for Phase 2.2:
 We san see unexpected performance where the parallel implementation is consistently slower than both sequential and built-in sorting. The parallel version runs slower because managing and coordinating threads requires more time than what we save by dividing the work. Next, I will test with larger array sizes to see if the parallel approach becomes more effective.
 
 
-** Phase 2.3: Crossover Point Identification (Extended Range: $1000,000$ to $10,000,000$)
+** Phase 3: Crossover Point Identification (Extended Range: $1000,000$ to $10,000,000$)
 
 To find the array size necessary to observe a speedup, the input range was dramatically increased (from $1,000,000$ to $10,000,000$ with $1,000,000$ step size). This test was executed also $20$ times. This preliminary test successfully identified the crossover point:
 The Parallel Quicksort demonstrated superior performance, becoming the fastest method when the array size exceeded approximately $6,000,000$ elements.
