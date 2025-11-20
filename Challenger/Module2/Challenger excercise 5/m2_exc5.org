@@ -1,5 +1,5 @@
 ** Overview of the analysis of the risk of failure of the O-rings on the Challenger shuttle
-The notebook I am going to inspect is located in "documents" directory, named "module2_excercise5.org".
+The notebook I am going to inspect is located in /documents/ directory, named /module2_excercise5.org/.
 
 *** What was done well:
 - *Clear approach:* The analysis follows a clear, step-by-step approach that is easy to read and well explained.
