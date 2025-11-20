@@ -1,0 +1,22 @@
+* Overview of the analysis of the risk of failure of the O-rings on the Challenger shuttle
+The notebook I am going to inspect is located in "documents" directory, named "module2_excercise5.org".
+
+** What was done well
+- The analysis follows a clear, step-by-step approach that is easy to read and well explained.
+
+- The use of Logistic Regression is well justified: the outcome is binary (damaged or not), multiple trials exist per temperature, and the goal is to model failure probability as a function of temperature.
+
+
+** What Could Have Been Improved
+
+- Data Exclusion: Deleting all flights without malfunctions reduced the amount of available information. Keeping these records could have provided a more complete picture of the relationship between temperature and O-ring outcomes.
+
+- Ignoring Pressure Data: They excluded pressure because they noticed it was almost always 200, which was true but only for a fragment of failed flights that they observed. However, this was only true because they had already removed all the successful flights from the dataset. By including the full dataset, they could have properly tested if pressure, combined with temperature, was a key factor in the failures.
+
+- Visualization of Temperature / Frequency: The scatter plot included too few data points and was also misleading. The analysis was based only on moderate temperatures (55°F–75°F), which showed no clear trend. However, the real risk occurred at freezing temperatures (below 32°F), for which no data was included. 
+
+- Misleading Estimation of the probability of O-ring malfunction: Misleading Probability Estimation: The logistic regression model was trained only on failed flights. This created a biased model that incorrectly showed temperature had no effect. By ignoring successful flights, the analysis underestimated the danger at cold temperatures.
+
+
+** Main takeaway:
+The main problem with the analysis was that it used incomplete data. By only looking at flights where O-rings failed and ignoring all the successful flights, the researchers got a distorted picture. This led them to miss the real risk of cold temperatures, wrongly assume that pressure wasn't important, and create statistical models that didn't work. The key lesson is that you can't understand why something fails if you only study the failures—you also need to look at the successes.
