@@ -1,4 +1,4 @@
-## Quiz P 01
+## Quiz P 02
 ### Getting started with RStudio
 
 1. What does an environment like Rstudio provide in comparison to working in the R console or running R scripts directly?
