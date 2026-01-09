@@ -1,6 +1,6 @@
 ---
 title: "John Snow Cholera Analysis"
-output: html_document
+output: github_document
 editor_options: 
   markdown: 
     wrap: 72
@@ -21,6 +21,7 @@ library(sf)
 library(leaflet)
 library(leaflet.extras)
 library(dplyr)
+
 
 # Load Shapefiles and convert from British National Grid (meters)to WGS84 (GPS coordinates) so they align with the modern world map
 
@@ -49,7 +50,10 @@ leaflet() %>%
                    color = "blue", 
                    radius = 6, 
                    label = "Public Water Pump")
+
 ```
+![Proportional Map](map1.png)
+
 
 ## Mission 2: Density Analysis
 
@@ -57,12 +61,13 @@ The heatmap below shows the "hot zone" of the epidemic, clearly
 centering on the Broad Street pump.
 
 ```{r Mission2}
-  
-  
 # Use a Heatmap to prove the Broad Street pump is the outbreak's center
 # This highlights the 'hot zone' where the concentration of deaths is highest
 leaflet() %>%
   addTiles() %>%
   addHeatmap(data = deaths, intensity = ~Count, blur = 20, radius = 15) %>%
   addCircleMarkers(data = pumps, color = "blue", radius = 5, label = "Pump")
+
+
 ```
+![Heatmap Map](map2.png)
