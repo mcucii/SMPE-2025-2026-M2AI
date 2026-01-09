@@ -1,0 +1,68 @@
+---
+title: "John Snow Cholera Analysis"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Introduction
+
+In 1854, London's Soho district suffered a severe cholera outbreak. Dr.
+John Snow used mapping to identify a contaminated water pump as the
+source.
+
+## Libraries & Data Preparation
+
+First, we load the necessary libraries and the data
+
+```{r setup, message=FALSE, warning=FALSE}
+library(sf)
+library(leaflet)
+library(leaflet.extras)
+library(dplyr)
+
+# Load Shapefiles and convert from British National Grid (meters)to WGS84 (GPS coordinates) so they align with the modern world map
+
+deaths <- st_read("data/SnowGIS_SHP/Cholera_Deaths.shp")
+pumps <- st_read("data/SnowGIS_SHP/Pumps.shp")
+
+deaths <- st_transform(deaths, 4326 )
+pumps <- st_transform(pumps, 4326)
+```
+
+## Mission 1: Proportional Symbol Map
+
+This map replicates Snow's original visualization. The size of the red
+circles represents the number of deaths at each location.
+
+```{r Mission1}
+# Circle radius is scaled by the square root of death count for visual accuracy
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = deaths, 
+                   radius = ~sqrt(Count) * 3, 
+                   color = "red", 
+                   fillOpacity = 0.5,
+                   label = ~paste("Deaths:", Count)) %>%
+  addCircleMarkers(data = pumps, 
+                   color = "blue", 
+                   radius = 6, 
+                   label = "Public Water Pump")
+```
+
+## Mission 2: Density Analysis
+
+The heatmap below shows the "hot zone" of the epidemic, clearly
+centering on the Broad Street pump.
+
+```{r Mission2}
+  
+  
+# Use a Heatmap to prove the Broad Street pump is the outbreak's center
+# This highlights the 'hot zone' where the concentration of deaths is highest
+leaflet() %>%
+  addTiles() %>%
+  addHeatmap(data = deaths, intensity = ~Count, blur = 20, radius = 15) %>%
+  addCircleMarkers(data = pumps, color = "blue", radius = 5, label = "Pump")
+```
