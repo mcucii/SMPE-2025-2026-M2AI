@@ -69,6 +69,21 @@ We san see unexpected performance where the parallel implementation is consisten
 To find the array size necessary to observe a speedup, the input range was dramatically increased (from $1,000,000$ to $10,000,000$ with $1,000,000$ step size). This test was executed also $20$ times. This preliminary test successfully identified the crossover point:
 The Parallel Quicksort demonstrated superior performance, becoming the fastest method when the array size exceeded approximately $6,000,000$ elements.
 
-[[./data/masa_2025_15_10/quicksort_results_FINAL.png]]
+[[./data/masa_2025_15_10/quicksort_results_FINAL.png]]Parallel QuickSort is the best choice for large datasets because it scales much more efficiently than the other versions once you get past the initial setup overhead.
 
 The parallel implementation successfully outperforms both sequential and built-in sorting methods, demonstrating effective parallelization. The consistent performance advantage across all tested array sizes, with clear separation in confidence intervals, confirms the practical benefits of our parallel approach.
+
+
+** Linear Regression
+
+In this part, I used linear regression to predict and analyze the data collected from the benchmark tests. By fitting a linear model to the execution times of each QuickSort implementation, I was able to observe how each algorithm scales as the array size increases.
+We can observe results on following images.
+
+[[./data/masa_2025_15_10/seq.png]]
+[[./data/masa_2025_15_10/parallel.png]]
+[[./data/masa_2025_15_10/builtin.png]]
+[[./data/masa_2025_15_10/comparison.png]]
+
+The results show that the Sequential and Built-in versions perform almost exactly the same, with their regression lines nearly being on top of each other. This tells us that the standard library’s sorting algorithm and our custom sequential version grow at about the same rate as the array size gets bigger. While they are both very fast for smaller amounts of data, they have a steeper slope, which means they start to slow down more quickly as the workload increases.
+On the other hand, the parallel version handles larger sizes much better. It starts off a bit slower because the computer needs extra time to set up and manage the different threads, which is why the line starts higher on the graph. But as the array size grows, it becomes way more efficient. Around the 4 million mark, the benefit of using multiple cores finally outweighs that setup time, and it becomes the fastest option.
+FInally, parallel implementation is the best choice for large datasets because it scales much more efficiently than the other versions once you get past the initial setup overhead.
